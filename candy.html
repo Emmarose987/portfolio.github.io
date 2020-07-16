@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Candy ETL</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" type="image/png" href="favicon.png">
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<a href="index.html" class="logo"><strong></strong></a>
+
+				</header>
+
+				<!-- Content -->
+				<section>
+					<header class="main">
+						<h1>Extract | Transform | Load</h1>
+					</header>
+
+					<span class="image fit"><img src="candy.jpg" alt="" /></span>
+
+					<p>Sweet or sour? Chocolate or caramel? Chocolate? White, milk, or dark chocolate? Snickers,
+						KitKat, or Milky Way? No matter your favorite candy, you can probably walk down the aisles of
+						your local grocery on a mid October day and buy a trashbag sized bag of it. Halloween is the most
+						popular time for candy sales, but what makes the most popular candies so popular? For this
+						project, we investigated if nutritional information could potentially be used as in indicator for consumer purchasing (i.e. grams of sugar, water content, or grams of
+						protein) and candy popularity.</p>
+
+
+
+					<hr class="major" />
+
+
+					<h2>Extract</h2>
+					<p>We selected two CSVs as our data sources</p>
+					<li>A ranking of Halloween candy that people most prefer from FiveThirtyEight, created through a
+						poll of 8,371 IP addresses on FiveThirtyEight.com. This CSV contains candy names, categories
+						(‘fruity’, ‘chocolate’ etc), win percent (popularity), price percent, and sugar percent. The
+						article in which we sourced our data can be found <a
+							href="https://fivethirtyeight.com/videos/the-ultimate-halloween-candy-power-ranking/">here</a>
+						and the CSV from Github can be found <a
+							href="https://github.com/fivethirtyeight/data/blob/master/candy-power-ranking/candy-data.csv">here</a>.
+					</li>
+					<li>Our nutritional data was extracted from the USDA’s food composition standard reference. The USDA
+						is a reliable and standardized source for nutritional information that provides downloadable
+						csvs of their data. We chose to use the abbreviated SR28ABXL.Zip file because this contained the
+						most relevant columns for our use (the non-abbreviated version contains information on alcohol,
+						caffeine, theobromine and many other nutrient contents that we weren’t interested in examining).
+						We selected the excel format because this would be easiest to manipulate as a csv. <a
+							href="https://www.ars.usda.gov/northeast-area/beltsville-md-bhnrc/beltsville-human-nutrition-research-center/methods-and-application-of-food-composition-laboratory/mafcl-site-pages/sr11-sr28/">The
+							USDA CSV used.</a> </li>
+					<p></p>
+					<span class="image fit"><img src="extract.png" alt="" width="100px" height="500px" /></span>
+
+					<hr class="major" />
+
+					<h2>Transform</h2>
+					<h3>Cleaning, filtering, merging</h3>
+					<p>The USDA provides data on all food types, so after importing the csv into a dataframe, we
+						identified that we would need to split the ‘Shrt_Desc’ column to extract the relevant food
+						category (‘Candies’) and candy name. We split the ‘Shrt_Desc’ column on commas, and performed a
+						.loc to extract foods in the ‘Candies’ category, and then dropped columns with ‘None’ values. We
+						ended up with 134 rows of candy, and exported this to a new csv file. 5. Part of our
+						transformation took place in Excel, where we had to change the names that the USDA had given
+						various candies to match the candy names in the FiveThirtyEight dataset (i.e ‘Butterfinger Candy
+						Bar’ to ‘Butterfinger’). Since the dataset was relatively small, it was faster to do this by
+						copy-pasting from the FiverThirtyEight CSV into the extracted USDA candy dataset in Excel rather
+						than cleaning the names programmatically.</p>
+					<span class="image fit"><img src="split.png" alt="" width="100px" height="500px" /></span>
+					<p>Once our candy names matched, we created dataframes for both csvs using pandas and removed
+						foreign characters from the resulting candy names.</p>
+					<span class="image fit"><img src="changenames.png" alt="" width="100px" height="500px" /></span>
+					<p>We changed the column names to increase ease of formatting to our relational database, and then
+						merged our CSVs on our candy name columns using an inner join, thus dropping any columns with
+						incomplete data. </p>
+					<span class="image fit"><img src="newcolumns.png" alt="" width="100px" height="500px" /></span>
+					<p>We then dropped any irrelevant columns (like the USDA database number) and duplicates. We ended
+						up with 34 rows.</p>
+
+					<hr class="major" />
+
+					<h2>Load</h2>
+					<p>We loaded our final data table into a relational database in PostgreSQL called ‘candy’ (merged in
+						pandas so no need to join in SQL). A relational database is easy to scale and maintain data
+						integrity, so we thought for this small database with potentially many more entries, that this
+						made the most sense.</p>
+
+					<h3>Using the ETL method, we created a database that is now employer ready for use on potential
+						projects.</h3>
+				</section>
+
+				<hr>
+
+				<footer id="footer">
+					<p class="copyright">&copy; Emmarose McCoig. All rights reserved.</a>.</p>
+				</footer>
+
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+
+
+
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Homepage</a></li>
+						<li><a href="generic.html">About Me</a></li>
+						<li><a href="resume.html">Resume</a></li>
+						<li>
+							<span class="opener">Projects</span>
+							<ul>
+								<li><a href="CTA.html">CTA Ridership vs Chicago Crime</a></li>
+								<li><a href="candy.html">ETL</a></li>
+								<li><a href="spotify.html">Spotify Application</a></li>
+
+							</ul>
+						</li>
+
+
+
+					</ul>
+				</nav>
+
+				<!-- Section -->
+
+
+				<!-- Section -->
+				<section>
+					<header class="major">
+						<h2>Get in touch</h2>
+					</header>
+					<p>Please feel free to reach out to me for interview oppurtunity or furthur information!</p>
+					<ul class="contact">
+						<li class="icon solid fa-envelope"><a
+								href="mailto: emmamccoig@gmail.com">emmamccoig@gmail.com</a></li>
+						<li class="icon solid fa-phone">(540) 960 1877</li>
+						<li class="icon solid fa-home">Chicago, IL<br /></li>
+					</ul>
+				</section>
+
+
+
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

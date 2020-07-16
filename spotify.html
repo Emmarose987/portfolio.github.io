@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Spotify Dashboard</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" type="image/png" href="favicon.png">
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<a href="index.html" class="logo"><strong></strong></a>
+
+				</header>
+
+				<!-- Content -->
+				<section>
+					<header class="main">
+						<h1>Spotify Dashboard</h1>
+					</header>
+
+					<span class="image fit"><img src="spotify.png" alt="" /></span>
+
+					<p>For this project, my teammates and I created a dashboard that even the die hard Apple Music and
+						Google Play users can enjoy. Using Python, SQL, HTML, and JavaScript we created an interactive
+						dashboard that allows you to select a date and see the top song for that day in 2017. Our
+						dashboard provides you with information on the top song of that day with three visualizations.
+						The bar graph supplies details on which countries had the highest stream count for the song. The
+						interactive gauge states how many cumulative days that song remained number one on the charts.
+						Lastly, our line chart represents daily streams of the song in the United Stastes.</p>
+
+
+
+					<hr class="major" />
+
+
+					<h2>ETL With Python</h2>
+					<p>For our data munging we did a standard ETL process. We extracted our data as a CSV from
+						Kaggle.com and loaded it into Jupyter Notebook. We then created our database in PostgreSQL and
+						made a table for our Spotify data to live. </p>
+					<span class="image fit"><img src="extract_spotify.png" alt="" width="100px" height="500px" /></span>
+
+
+					<p></p>
+
+					<p>Our next step was to transform our data and load it into the database. For our
+						transform, we needed to change the column names to fit the ones we created for our database.
+						Once the column names had been transformed, it was time to load it into PostgreSQL. To do this,
+						we used SQLalchemy to make a connection string to Postgres and set our engine. Finally, we used
+						the "to_sql" function to load it into our database.</p>
+
+					<span class="image fit"><img src="transform_load.png" alt="" width="100px" height="500px" /></span>
+
+
+
+
+					<hr class="major" />
+
+					<h2>Flask App</h2>
+
+					<p>To make a route from our database to our JavaScript and HTML, we needed to include a Flask app.
+					</p>
+					<span class="image fit"><img src="app_py.png" alt="" width="100px" height="500px" /></span>
+
+					<p>As you can see above, we created routes to to our index.html, our dates, and our data. We also
+						requested that it return the data from the CSV as a JSON to used in JavaScript. Not pictured, we
+						create routes for our streams, our guage, and our yearly streams.</p>
+
+
+					<hr class="major" />
+
+					<h2>HTML</h2>
+					<p>Our HTML was a very basic backbone to run our dashboard. It did was not made with bells and
+						whistles, but it contained everything we needed to get our dashboard operating and looking good
+						like Bootstrap, JQuery, Plot.ly, and JavaScript. Additionally, it how we set up our titles for
+						our visualizations and where we created wells for the visualizations to live. </p>
+					<span class="image fit"><img src="html.png" alt="" width="100px" height="500px" /></span>
+
+					<hr>
+
+					<h2>JavaScript</h2>
+					<p>Using D3 with JavaScript, we were capable of making our visualizations interactive. This is where
+						is all came together as we created our dropdown menu and created our different visualizations.
+						With D3, we were able to match our graphs and guage rgba color with the exact green that is used
+						by spotify.</p>
+					<span class="image fit"><img src="js.png" alt="" width="100px" height="500px" /></span>
+					<p></p>
+
+					<h3>JQuery</h3>
+					<p>Our project assignment required that we integrate another form of Javacript into our design. So
+						we chose to use JQuery to take care of our CSS. We had already created our CSS file, so this was
+						a pretty simple transition. </p>
+						<span class="image fit"><img src="jquery.png" alt="" width="100px" height="500px" /></span>
+					
+					<hr>
+
+					<p>Please feel free to reach out with questions or requests of more detail explanation and code!</p>
+				</section>
+
+				<hr>
+
+				<footer id="footer">
+					<p class="copyright">&copy; Emmarose McCoig. All rights reserved.</a>.</p>
+				</footer>
+
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+
+
+
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Homepage</a></li>
+						<li><a href="generic.html">About Me</a></li>
+						<li><a href="resume.html">Resume</a></li>
+						<li>
+							<span class="opener">Projects</span>
+							<ul>
+								<li><a href="CTA.html">CTA Ridership vs Chicago Crime</a></li>
+								<li><a href="candy.html">ETL</a></li>
+								<li><a href="spotify.html">Spotify Application</a></li>
+
+							</ul>
+						</li>
+
+
+
+					</ul>
+				</nav>
+
+				<!-- Section -->
+
+
+				<!-- Section -->
+				<section>
+					<header class="major">
+						<h2>Get in touch</h2>
+					</header>
+					<p>Please feel free to reach out to me for interview oppurtunity or furthur information!</p>
+					<ul class="contact">
+						<li class="icon solid fa-envelope"><a
+								href="mailto: emmamccoig@gmail.com">emmamccoig@gmail.com</a></li>
+						<li class="icon solid fa-phone">(540) 960 1877</li>
+						<li class="icon solid fa-home">Chicago, IL<br /></li>
+					</ul>
+				</section>
+
+
+
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

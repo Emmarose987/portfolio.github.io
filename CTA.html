@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>CTA Ridership</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" type="image/png" href="favicon.png">
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<a href="index.html" class="logo"><strong></strong></a>
+
+				</header>
+
+				<!-- Content -->
+				<section>
+					<header class="main">
+						<h1>CTA Ridership vs. Chicago Crime</h1>
+					</header>
+
+					<span class="image main"><img src="CTA.jpg" alt="" /></span>
+
+
+					<h2>Inspiration</h2>
+					<p>Millions of people rely on the Chicago Transit Authority everyday to to get them where they need
+						to go. However, does increased levels of crime on the CTA cause individuals to find new methods
+						of transportation? Additionally, do we see a trend in increased ridership as crime rate
+						declines?</p>
+					<p>The goal of this project was to compare frequency of Chicago crime against the frequency of CTA
+						ridership on year to year bases. </p>
+
+					<hr class="major" />
+
+					<h2>Data</h2>
+					<p>Chicago provides full transparency data of all the crimes that take place in the city on their <a
+							href="https://www.chicago.gov/city/en/dataset/crime.html"> government website</a>. The CTA
+						also provides <a href="https://www.transitchicago.com/data/"> open source data</a> of all
+						ridership by year. </p>
+
+
+					<hr class="major" />
+
+					<h2>Extract and Transform</h2>
+					<p> The extraction of the data from the sources was done using Pandas, a software in Python. Both
+						datasets were quite sizable, with CTA data containing 6939 rows and Chicago crime dataset
+						containing 11,580 rows. Thus, this required a good amount of cleaning up and sizing down before
+						we began analysis.</p>
+
+					<!--Break-->
+
+					<p>First extract CTA ridership data and remove unwated columns.</p>
+
+					<span class="image fit"><img src="import_cta_data.png" alt="" /></span>
+
+					<!--Break-->
+
+					<p>Then extract Chicago crime data and remove unwanted columns.</p>
+
+					<span class="image fit"><img src="import_crime_data.png" alt="" /></span>
+					<p>Now that the data had been extracted, it was time to do a bit more cleaning up. Due to COVID-19,
+						we decided to exclude the year 2020 ridership data. We did not feel that data from the year 2020
+						would provide accurate representation of normal ridership. Therefor, we needed to drop all
+						data from after 2019.</p>
+					<span class="image fit"><img src="filtered_crime_date.png" alt="" /></span>
+
+					<p>After all of our unwanted rows and columns were removed, it was time to merge the two datasets to
+						get out final dataset.</p>
+					<span class="image fit"><img src="merge_cta_data.png" alt="" /></span>
+
+					<!--Break-->
+
+					<hr>
+
+					<h2>Data Analysis</h2>
+					<p>During our analysis there were many questions that needed to be addressed. Those questions
+						included: </p>
+					<ul>
+						<li>What years had the highest ridership and what days had the highest amount of crime?</li>
+						<li>What are the top crimes we see on the CTA?</li>
+						<li>Do the days of most and least amount of ridership coincide with days of highest and lowest
+							crime?</li>
+						<li>Does our data show an overall correlation? </li>
+					</ul>
+
+					<h3>What years had the highest ridership and what days had the highest amount of crime?</h3>
+					<div class="row">
+						<div class="col-6 col-12-medium">
+							<div class="box alt">
+								<div class="row gtr-50 gtr-uniform">
+									<div class="col-10"><span class="image fit"><img src="crime_rate_by_year.png"
+												alt="" /></span></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-6 col-12-small">
+							<div class="box alt">
+								<div class="row gtr-50 gtr-uniform">
+									<div class="col-10"><span class="image fit"><img src="rider_count_by_year.png"
+												alt="" /></span></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<p>Upon plotting crime rate against CTA ridership, we found that we could see trends in the data.
+						With the significant drop of crime in 2015 we can see an increase in ridership. Then as crime
+						rate starts to increase again, we notice a decile in ridership. This lead us to believe we were
+						on to a signicicant correlation. </p>
+
+
+
+
+
+					<!--Break-->
+
+
+					<h3>What are the top crimes?</h3>
+
+
+
+
+					<div class="row">
+						<div class="col-6 col-12-medium">
+							<div class="box alt">
+								<div class="row gtr-50 gtr-uniform">
+									<div class="col-10"><span class="image fit"><img
+												src="crimes_from_2001-2009_on_CTA.png" alt="" /></span></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-6 col-12-small">
+							<div class="box alt">
+								<div class="row gtr-50 gtr-uniform">
+									<div class="col-10"><span class="image fit"><img src="top_5_crimes.png"
+												alt="" /></span></div>
+								</div>
+							</div>
+						</div>
+						<p>Theft triumphs as most popular crime in Chicago and on the CTA (first graph repsents crimes
+							in all of chicago and second graph represents crimes on CTA). However, we
+							believed that the crimes that would alter any sort of ridership and that would get news
+							coverage would be violent crimes. Therefor, we decided to elliminate all crimes from our
+							data that were not violent crimes. </p>
+
+						<h3>What days had the highest ridership and what days had the highest amount of crime?</h3>
+						<p>Any Chciago native can tell you that the busiest and roudiest days of the year udoubtably
+							fall on days that the Chicago Cubs have a home game. Most Chicago residents will avoid any
+							stop near Wrigley Field, because they know their fate will look like being jampacked in the train
+							or bus with hundreds of Cubs Fans. So it was to no suprise that on November 4th of 2016,
+							during the Cubs parade, Chicago experienced its highest crime rate and its highest amount
+							ridership from 2001 to 2019. </p>
+						<p>Christmas day of 2004 was a quiet day for the CTA, when it experience its lowest amount of
+							ridership from 2001 to 2019. Coincidentlty, it seems the Christmas spirit stretched all
+							throughout Chicago that day, because Chicago also experienced its lowest amount of crime on
+							a
+							given day from 2001 to 2019.</p>
+						<span class="image fit"><img src="special_day.png" alt="" width="100px" height="500px" /></span>
+
+						<h3>Does our data show an overall correlation? </h3>
+						<p>Since we seemed to be on a pretty convincing path that crime does in fact effect CTA train
+							ridership, we decided to investigate if our data had any real statistical significance.</p>
+						<span class="image fit"><img src="correlation.png" alt="" width="100px" height="500px" /></span>
+
+						<hr>
+
+						<h2>Results</h2>
+						<p>Although our plotting lead us to believe that there could be trends leading to our
+							hypothesis, we found no statistical sidnificance in our data. If we were to take this project
+							further, we would look deeper into the day-by-day crime versus ridership to see if there is
+							a signicant correlation between them on a day to day basis instead of years. We would also
+							investigate other potenetial causes for the steep decrease in crime in 2015.</p>
+				</section>
+
+				<hr>
+
+				<footer id="footer">
+					<p class="copyright">&copy; Emmarose McCoig. All rights reserved.</a>.</p>
+				</footer>
+
+
+
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+
+
+
+
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Homepage</a></li>
+						<li><a href="generic.html">About Me</a></li>
+						<li><a href="resume.html">Resume</a></li>
+
+						<li>
+							<span class="opener">Projects</span>
+							<ul>
+								<li><a href="CTA.html">CTA Ridership vs Chicago Crime</a></li>
+								<li><a href="candy.html">ETL</a></li>
+								<li><a href="spotify.html">Spotify Application</a></li>
+
+							</ul>
+						</li>
+
+
+					</ul>
+				</nav>
+
+				<!-- Section -->
+
+
+				<!-- Section -->
+				<section>
+					<header class="major">
+						<h2>Get in touch</h2>
+					</header>
+					<p>Please feel free to reach out to me for interview oppurtunity or furthur information!</p>
+					<ul class="contact">
+						<li class="icon solid fa-envelope"><a
+								href="mailto: emmamccoig@gmail.com">emmamccoig@gmail.com</a></li>
+						<li class="icon solid fa-phone">(540) 960 1877</li>
+						<li class="icon solid fa-home">Chicago, IL<br /></li>
+					</ul>
+				</section>
+
+
+
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
